@@ -4,9 +4,9 @@
 		<meta charset="UTF-8">
 		<title>你存在了多久</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-		<link rel="stylesheet" type="text/css" href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css"/>
+		<script src="js/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
 		<script type="text/javascript">
 			var ubirthday,tds;
 			$(function(){
@@ -20,6 +20,8 @@
 				}
 				var ubdTime = new Date(ubirthday.value).getTime()+new Date().getTimezoneOffset()*60*1000;
 				var nowTime = new Date().getTime();
+//				alert(new Date(ubirthday.value)+"\n"+new Date());
+//				alert(new Date().getTimezoneOffset());
 				var minute = (nowTime-ubdTime)/(60*1000);
 				var hour = minute/60;
 				var day = hour/24;
@@ -38,15 +40,15 @@
 			.table>tbody>tr>td {
 				/*height: 100px;*/
 				text-align: center;
-				vertical-align: middle;
+				vertical-align: middle
 			}
 		</style>
 	</head>
 	<body>
-		<div class="jumbotron" style="background: url(http://attach.bbs.miui.com/forum/201502/28/212614ijennd4jdd5ezd5e.jpg);">
+		<div class="jumbotron" style="background-image: url(img/161.jpg);background-position:center;">
 			<div class="container" style="color: white;">
-				<h2>时光易逝&nbsp;岂容我待</h2>
-		    	<h3>流年在等谁的相濡以沫</h3>
+				<h1>时光易逝&nbsp;岂容我待</h1>
+		    	<h3>流年在等谁的相濡以沫</h3><br />
 		    	<form class="form-inline" action="#" role="form">
 	    			<label for="ubirthday" style="padding-left: 0px;">出生日期</label>
 		    		<div class="form-group">
@@ -59,14 +61,14 @@
 			</div>
 		</div>
 		<div class="container">
-			<h3>你已经来到这个世界:</h3>
+			<h2>你已经来到这个世界：</h2>
 			<table class="table table-bordered">
-			  	<tr  >
+			  	<tr class="active" >
 			  		<td>0 <br />年</td>
 			  		<td>0 <br />月</td>
 			  		<td>0 <br />周</td>
 			  	</tr>
-			  	<tr >
+			  	<tr class="active">
 			  		<td>0 <br />天</td>
 			  		<td>0 <br />小时</td>
 			  		<td>0 <br />分钟</td>

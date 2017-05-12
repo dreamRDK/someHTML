@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script >
+			var text1,length,ele;
+			onload=function() {
+				ele=document.getElementById("typing");
+				text1=ele.innerHTML;
+				ele.innerHTML="";
+				length=text1.length;
+				timer=setInterval(type,30);
+			}
+			var i = 0;
+			function type() {
+				var text=document.createTextNode(text1.substring(i,i+1));
+				ele.appendChild(text);
+				i=i+1;
+				if(i==length) {
+					clearInterval(timer);
+				}
+			}
+			
+		</script>
+		<style type="text/css">
+			.contanier {
+				background-color: #000000;
+				background-attachment: fixed;
+				width: 100%;
+				height:5000px;
+				margin: 0 auto;
+			}
+			#typing {
+				color:green;
+				white-space: pre;
+				display: block;
+				margin: 0 auto;
+				width: 100%;
+			}
+		</style>
+
+	</head>
+
+	<body >
+		<div class="contanier">
+			<p id="typing">
+package com.itheima.test;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import com.itheima.domain.Product;
+import com.itheima.service.ProductService;
+
+public class TestApp {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		while(true) {
+			System.out.println("请输入以下命令进行操作：");
+			System.out.println("C:创建、 U:修改、D:删除、DA:批量删除、QI:根据id查询、FA:查询所有、Q:退出");
+			String input = sc.nextLine();
+			
+			switch(input) {
+			case "c":
+				add(sc);
+				break;
+			case "u":
+				update(sc);
+				break;
+			case "d":
+				delete(sc);
+				break;
+			case "da":
+				deleteAll(sc);
+				break;
+			case "qi":
+				findById(sc);
+				break;
+			case "fa":
+				findAll();
+				break;
+			case "q":
+				System.out.println("谢谢使用");
+				System.exit(0);
+			default:
+				System.out.println("输入有误");
+				break;
+			}
+		}
+	}
+	
+	// 批量删除
+	private static void deleteAll(Scanner sc) {
+		System.out.println("进入批量删除模式：（输入-1结束）");
+		ProductService ps = new ProductService();
+		List<Integer> list = new ArrayList<Integer>();
+		while(true) {
+			System.out.println("请输入要删除的商品id：");
+			int id = Integer.parseInt(sc.nextLine());
+			if(id != -1) {
+				Product p = ps.findById(id);
+				if(p == null) {
+					System.out.println("要删除的商品不存在");
+				} else {
+					list.add(id);
+					System.out.println("已标记要删除的商品：" + p);
+				}
+			} else {
+				if(list.size() != 0) {
+					System.out.println("确认删除标记的" + list.size() + "条商品信息：y\\n");
+					String flag = sc.nextLine();
+					
+					if("y".equalsIgnoreCase(flag)) {
+						int r = ps.deleteAll(list);
+						if(r > 0) {
+							System.out.println("批量删除" + r + "条商品信息成功");
+						}
+					}
+				}
+				break;
+			}
+		}
+	}
+
+	private static void delete(Scanner sc) {
+		System.out.println("请输入要删除的商品id：");
+		int id = Integer.parseInt(sc.nextLine());
+		
+		ProductService ps = new ProductService();
+		Product p = new Product();
+		p = ps.findById(id);
+		
+		if(p == null) {
+			System.out.println("您要删除的商品不存在");
+		} else {
+			System.out.println("要删除的商品信息：" + p);
+			System.out.println("请确认是否删除：y\\n");
+			String s = sc.nextLine();
+			
+			if("y".equalsIgnoreCase(s)) {
+				int r = ps.deleteById(id);
+				if(r > 0) {
+					System.out.println("删除成功");
+				} else {
+					System.out.println("删除失败");
+				}
+			}
+		}
+	}
+
+	// 修改商品
+	private static void update(Scanner sc) {
+		System.out.println("请输入要修改的商品id：");
+		int id = Integer.parseInt(sc.nextLine());
+		
+		ProductService ps = new ProductService();
+		Product p = ps.findById(id);
+		if(p == null) {
+			System.out.println("您要修改的商品不存在");
+		} else {
+			System.out.println("商品原信息：" + p);
+			
+			System.out.println("请输入新的商品名称：");
+			p.setPname(sc.nextLine());
+			System.out.println("请输入新的商品价格：");
+			p.setPrice(Integer.parseInt(sc.nextLine()));
+			
+			int r = ps.updateProduct(p);
+			
+			if(r > 0) {
+				System.out.println("修改成功");
+				System.out.println("修改后商品信息：" + ps.findById(id));
+			} else {
+				System.out.println("修改失败");
+			}
+		}
+		
+	}
+	// 添加商品
+	private static void add(Scanner sc) {
+		System.out.println("请输入商品名称：");
+		String pname = sc.nextLine();
+		System.out.println("请输入商品价格：");
+		int price = Integer.parseInt(sc.nextLine());
+		
+		Product p = new Product();
+		p.setPname(pname);
+		p.setPrice(price);
+		p.setFlag("1");
+		p.setCategory_id("c001");
+		
+		int r = new ProductService().add(p);
+		if(r > 0) {
+			System.out.println("添加成功");
+		} else {
+			System.out.println("添加失败");
+		}
+	}
+	// 通过id查询
+	private static void findById(Scanner input) {
+		System.out.println("请输入要查询的id：");
+		int id = Integer.parseInt(input.nextLine());
+		Product p = new ProductService().findById(id);
+		if(p != null) {
+			System.out.println("查询结果：");
+			System.out.println(p);
+		} else {
+			System.out.println("您要查询的商品不存在");
+		}
+		
+	}
+	// 查询所有
+	private static void findAll() {
+		List<Product> list = new ProductService().findAll();
+		System.out.println("查询结果：");
+		for (Product p : list) {
+			System.out.println(p);
+		}
+	}
+}
+
+			</p>
+		</div>
+
+	</body>
+
+</html>

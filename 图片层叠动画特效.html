@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div.contanier{
+				/*width: 1000px;
+				height: 200px;*/
+				z-index: 20;
+			}
+			
+			img {
+				width: 270px;
+				height: 480px;
+				position: absolute;
+				/*border: 1px solid;*/
+			}
+			
+			img:nth-child(1) {
+				z-index: 6;
+				left: 0px;
+			}
+			
+			img:nth-child(2) {
+				z-index: 5;
+				left: 10px;
+			}
+			
+			img:nth-child(3) {
+				z-index: 4;
+				left: 20px;
+			}
+			
+			img:nth-child(4) {
+				z-index: 3;
+				left: 30px;
+			}
+			
+			img:nth-child(5) {
+				z-index: 2;
+				left: 40px;
+			}
+		</style>
+		<script src="js/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var flag = 0;
+			var $img;
+			$(function(){
+				$img=$(".contanier img");
+				$(".contanier").click(
+					function(){
+						if(flag==0) {
+							showPic();
+						} else {
+							hidePic();
+						}
+					});
+			});
+			
+			function showPic() {
+				for(var i=$img.length; i>0; i--) {
+					nowLeft=i*($($img[i]).width()+0);
+					$($img[i]).animate({
+						"left":nowLeft
+					},1000);
+				}
+				flag=1;
+			}
+			
+			function hidePic() {
+				for(var i=0; i<$img.length; i++) {
+					nowLeft=i*10;
+					$($img[i]).animate({
+						"left":nowLeft
+					},1000);
+				}
+				flag=0;
+			}
+		</script>
+	</head>
+	<body>
+		<div class="contanier">
+			<img src="img/1-1.png"/>
+			<img src="img/1-2.png"/>
+			<img src="img/1-3.png"/>
+			<img src="img/1-4.png"/>
+			<img src="img/1-5.png"/>
+		</div>
+	</body>
+</html>

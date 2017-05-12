@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			img {
+				width:200px;
+				height: 200px;
+			}
+		</style>
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<script src="js/jquery.rotate.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#rotate-img").rotate({angle:36});
+				
+				$("#rotate-img1").click(function(){
+					$(this).rotate({angle:0,animateTo:360});
+//					$(this).animate({
+//						width:'400px',
+//						height:'400px'
+//					})
+				});
+				
+//				$("#rotate-img1").dblclick(function(){
+//					$(this).rotate({angle:0,animateTo:360});
+//					$(this).animate({
+//						width:'200px',
+//						height:'200px'
+//					})
+//				});
+				
+				setInterval(function(){
+					$("#rotate-img2").rotate({angle:0,animateTo:360});
+				},1000);
+				var a=0;
+				setInterval(function(){
+					$("#rotate-img3").rotate(a++);
+				},5);
+			
+			});
+		</script>
+	</head>
+	<body>
+		<img  id="rotate-img" src="img/1.jpg"/>
+		<img  id="rotate-img1" src="img/1.jpg"/>
+		<img  id="rotate-img2" src="img/1.jpg"/>
+		<img  id="rotate-img3" src="img/1.jpg"/>
+	</body>
+</html>
