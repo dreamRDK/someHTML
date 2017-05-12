@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>你存在了多久</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css"/>
+		<script type="text/javascript">
+			var ubirthday,tds;
+			$(function(){
+				ubirthday = $("#ubirthday")[0];
+				tds = $("table td");
+			});
+			function getData() {
+				if(ubirthday=="") {
+					alert("请选择生日！");
+					return;
+				}
+				var ubdTime = new Date(ubirthday.value).getTime()+new Date().getTimezoneOffset()*60*1000;
+				var nowTime = new Date().getTime();
+				var minute = (nowTime-ubdTime)/(60*1000);
+				var hour = minute/60;
+				var day = hour/24;
+				var week = day/7;
+				var year = ((nowTime-ubdTime)/((365*4+1)*24*60*60*1000))*4;
+				var month = year*12;
+				tds[0].innerHTML=year.toFixed(2)+"<br/>年";
+				tds[1].innerHTML=month.toFixed(2)+"<br/>月";
+				tds[2].innerHTML=week.toFixed(0)+"<br/>周";
+				tds[3].innerHTML=day.toFixed(0)+"<br/>天";
+				tds[4].innerHTML=hour.toFixed(0)+"<br/>时";
+				tds[5].innerHTML=minute.toFixed(0)+"<br/>分";
+			}
+		</script>
+		<style type="text/css">
+			.table>tbody>tr>td {
+				/*height: 100px;*/
+				text-align: center;
+				vertical-align: middle;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="jumbotron" style="background: url(http://attach.bbs.miui.com/forum/201502/28/212614ijennd4jdd5ezd5e.jpg);">
+			<div class="container" style="color: white;">
+				<h2>时光易逝&nbsp;岂容我待</h2>
+		    	<h3>流年在等谁的相濡以沫</h3>
+		    	<form class="form-inline" action="#" role="form">
+	    			<label for="ubirthday" style="padding-left: 0px;">出生日期</label>
+		    		<div class="form-group">
+		    			<div class="" style="padding-left: 0px;">
+		    				<input type="date" class="form-control" id="ubirthday" name="ubirthday" value=""/>
+		    			</div>
+		    		</div>
+					<button type="button" class="btn btn-default" onclick="getData()">确认</button>
+		    	</form>
+			</div>
+		</div>
+		<div class="container">
+			<h3>你已经来到这个世界:</h3>
+			<table class="table table-bordered">
+			  	<tr  >
+			  		<td>0 <br />年</td>
+			  		<td>0 <br />月</td>
+			  		<td>0 <br />周</td>
+			  	</tr>
+			  	<tr >
+			  		<td>0 <br />天</td>
+			  		<td>0 <br />小时</td>
+			  		<td>0 <br />分钟</td>
+			  	</tr>
+			</table>
+		</div>
+	</body>
+</html>
