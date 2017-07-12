@@ -3,15 +3,25 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>你存在了多久</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" >
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="js/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+		
 		<script type="text/javascript">
+		
+			
+			
+			
 			var ubirthday,tds;
 			$(function(){
 				ubirthday = $("#ubirthday")[0];
 				tds = $("table td");
+				
+				
 			});
 			function getData() {
 				if(ubirthday=="") {
@@ -53,9 +63,15 @@
 		    	<form class="form-inline" action="#" role="form">
 	    			<label for="ubirthday" style="padding-left: 0px;">出生日期</label>
 		    		<div class="form-group">
-		    			<div class="" style="padding-left: 0px;">
+		    			<!--<div class="" style="padding-left: 0px;">
 		    				<input type="date" class="form-control" id="ubirthday" name="ubirthday" value=""/>
-		    			</div>
+		    			</div>-->
+						<div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+							<input class="form-control" size="16" type="text" value="" readonly id="ubirthday" name="ubirthday">
+							
+							<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+						</div>
+						<input type="hidden" id="dtp_input2" value="" /><br/>
 		    		</div>
 					<button type="button" class="btn btn-default" onclick="getData()">确认</button>
 		    	</form>
@@ -76,5 +92,18 @@
 			  	</tr>
 			</table>
 		</div>
+		
+		<script>
+			$('.form_date').datetimepicker({
+				language:  'zh-CN',
+				weekStart: 1,
+				todayBtn:  1,
+				autoclose: 1,
+				todayHighlight: 1,
+				startView: 4,
+				minView: 2,
+				forceParse: 0
+			});
+		</script>
 	</body>
 </html>
